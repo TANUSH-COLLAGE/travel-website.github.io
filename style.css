@@ -570,24 +570,32 @@ h2::after {
 
 
 
-/* Responsive design tweaks for mobile (below 768px) */
+/* ---------------- MOBILE RESPONSIVE ---------------- */
 @media (max-width: 768px) {
 
+  /* Header Adjust */
   header {
     flex-direction: column;
+    align-items: center;
     padding: 15px;
     text-align: center;
   }
 
   .nav-menu ul {
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    gap: 8px;
   }
 
   .nav-menu li {
-    margin: 10px 0;
+    margin: 8px 0;
   }
 
+  .nav-menu a {
+    font-size: 1.5rem;
+  }
+
+  /* Hero Section */
   .hero {
     height: auto;
   }
@@ -608,53 +616,86 @@ h2::after {
   }
 
   .hero-content p {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 
   .hero-button {
-    padding: 10px 16px;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    padding: 10px 18px;
   }
 
+  /* Destination Grid */
   .destination-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
     padding: 0 10px;
+    gap: 30px;
   }
 
   .destination-item img {
-    height: 200px;
+    height: 220px;
   }
 
-  .footer-container {
-    flex-direction: column;
-    text-align: center;
-    gap: 20px;
+  .destination-item h3 {
+    font-size: 1.8rem;
   }
 
-  .footer-logo,
-  .footer-contact,
-  .footer-social {
-    width: 100%;
+  .destination-item p {
+    font-size: 1.4rem;
   }
 
-  .whatsapp-float {
-    bottom: 15px;
-    right: 15px;
-    width: 50px;
-    height: 50px;
-  }
-
-  .whatsapp-float img {
-    width: 30px;
-    height: 30px;
-  }
-
+  /* Cards */
   .card {
     width: 90%;
     margin: 0 auto;
   }
 
+  /* Footer */
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .footer-logo h2 {
+    font-size: 22px;
+  }
+
+  .footer-contact h3,
+  .footer-social h3 {
+    font-size: 18px;
+  }
+
+  .footer-contact p,
+  .footer-contact a {
+    font-size: 14px;
+  }
+
+  .footer-social a {
+    font-size: 20px;
+    padding: 8px;
+  }
+
+  /* WhatsApp Floating */
+  .whatsapp-float {
+    width: 50px;
+    height: 50px;
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .whatsapp-float img {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* Package buttons */
+  .package-btn {
+    font-size: 14px;
+    padding: 10px 18px;
+  }
+
+  /* Section Padding */
   .section {
     padding: 20px 10px;
   }
