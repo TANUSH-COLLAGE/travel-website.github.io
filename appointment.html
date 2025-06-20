@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Your Travel Appointment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .form-container {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #0077cc;
+    }
+
+    label {
+      font-weight: 600;
+      color: #333;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #0077cc;
+      box-shadow: 0 0 4px rgba(0, 119, 204, 0.5);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    .footer {
+      margin-top: 20px;
+      text-align: center;
+      color: white;
+      font-size: 14px;
+    }
+
+    /* WhatsApp Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      border-radius: 50%;
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 999;
+      transition: transform 0.3s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
+
+    .whatsapp-float img {
+      width: 30px;
+      height: 30px;
+    }
+
+    @media (max-width: 600px) {
+      .form-container {
+        padding: 20px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Book Your Travel Appointment</h2>
+    <form id="appointment-form" action="https://formspree.io/f/mldbboeg" method="POST">
+      <label>Your Email:
+        <input type="email" name="email" required placeholder="you@example.com">
+      </label>
+
+      <label>Phone Number:
+        <input type="tel" name="phone" id="phone" required placeholder="+91-XXXXXXXXXX">
+      </label>
+
+      <label>Your Message:
+        <textarea name="message" rows="4" required placeholder="Tell us where you'd like to go!"></textarea>
+      </label>
+
+      <button type="submit">Send Appointment Request</button>
+    </form>
+  </div>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/919999999999" target="_blank" class="whatsapp-float" title="Chat with us on WhatsApp">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp">
+  </a>
+
+  <div class="footer">
+    © 2025 Wanderlust Travels. All rights reserved.
+  </div>
+
+  <script>
+    // Simple form validation
+    document.getElementById("appointment-form").addEventListener("submit", function(e) {
+      const phoneInput = document.getElementById("phone").value;
+      const phonePattern = /^[0-9+\-\s]{10,15}$/;
+      if (!phonePattern.test(phoneInput)) {
+        alert("Please enter a valid phone number.");
+        e.preventDefault();
+      }
+    });
+  </script>
+
+</body>
+</html>
