@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewelry Virtual Try-On</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fffaf6;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #4a3f35;
+        }
+        header {
+            background: #e0cfc0;
+            padding: 1.5rem;
+        }
+        header h1 {
+            margin: 0;
+        }
+        main {
+            padding: 2rem;
+        }
+        #upload-section {
+            margin-bottom: 2rem;
+        }
+        #photo {
+            max-width: 100%;
+            height: auto;
+            border: 2px dashed #aaa;
+            margin-bottom: 1rem;
+        }
+        #jewelry-options img {
+            width: 100px;
+            margin: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        #jewelry-options img:hover {
+            transform: scale(1.1);
+        }
+        #canvas-container {
+            position: relative;
+            display: inline-block;
+        }
+        #canvas {
+            border: 2px solid #e0cfc0;
+            background: #fff;
+        }
+        .jewelry-overlay {
+            position: absolute;
+            width: 100px;
+            cursor: move;
+            user-select: none;
+        }
+        footer {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #e0cfc0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Virtual Jewelry Try-On</h1>
+    <p>Upload your photo and try beautiful pieces!</p>
+</header>
+
+<main>
+    <section id="upload-section">
+        <input type="file" id="upload" accept="image/*">
+        <br><br>
+        <div id="canvas-container">
+            <canvas id="canvas" width="400" height="500"></canvas>
+        </div>
+    </section>
+
+    <h2>Choose a Jewelry Piece:</h2>
+    <div id="jewelry-options">
+        <img src="https://i.imgur.com/oyQzXBO.png" alt="Ring" onclick="addJewelry(this.src)">
+        <img src="https://i.imgur.com/ztwOyfa.png" alt="Necklace" onclick="addJewelry(this.src)">
+        <img src="https://i.imgur.com/Q9z3KG3.png" alt="Bracelet" onclick="addJewelry(this.src)">
+    </div>
+</main>
+
+<footer>
+    <p>Made with sparkle by Jewelry Co.</p>
+</footer>
+
+<script>
+    const uploadInput = document.getElementById('upload');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let uploadedImage = null;
+
+    uploadInput.addEventListener('change', function(e) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = new Image();
+            img.onload = function() {
+                canvas.width = img.width > 400 ? 400 : img.width;
+                canvas.height = img.height > 500 ? 500 : img.height;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                uploadedImage = img;
+            }
+            img.src = event.target.result;
+        }
+        reader.readAsDataURL(e.target.files[0]);
+    });
+
+    function addJewelry(src) {
+        const img = document.createElement('img');
+        img.src = src;
+        img.className = 'jewelry-overlay';
+        img.style.top = '50px';
+        img.style.left = '50px';
+        document.getElementById('canvas-container').appendChild(img);
+
+        // Make it draggable
+        img.onmousedown = function(event) {
+            event.preventDefault();
+            let shiftX = event.clientX - img.getBoundingClientRect().left;
+            let shiftY = event.clientY - img.getBoundingClientRect().top;
+
+            function moveAt(pageX, pageY) {
+                img.style.left = pageX - shiftX - canvas.getBoundingClientRect().left + 'px';
+                img.style.top = pageY - shiftY - canvas.getBoundingClientRect().top + 'px';
+            }
+
+            function onMouseMove(event) {
+                moveAt(event.pageX, event.pageY);
+            }
+
+            document.addEventListener('mousemove', onMouseMove);
+
+            img.onmouseup = function() {
+                document.removeEventListener('mousemove', onMouseMove);
+                img.onmouseup = null;
+            };
+        };
+
+        img.ondragstart = function() {
+            return false;
+        };
+    }
+</script>
+
+</body>
+</html>
